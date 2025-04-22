@@ -2,7 +2,6 @@ use std::env;
 use dotenv::dotenv;
 
 use serenity::all::{Message, Reaction, Ready};
-
 use serenity::async_trait;
 use serenity::prelude::*;
 
@@ -23,17 +22,27 @@ impl EventHandler for Handler {
     async fn reaction_add(&self, ctx: Context, reaction: Reaction) {
         println!("Handling reaction: {:?}", reaction);
 
-        if reaction.message_id == 1363815289522749514
+        if reaction.message_id != 1363815289522749514
         {
+            return;
+        }
+
+        if let (Some(guild_id), Some(user_id)) = (reaction.guild_id, reaction.user_id) {
             let emoji_str = reaction.emoji.unicode_eq("👍");
 
             if emoji_str == true
             {
-                let _ = reaction.channel_id.say(&ctx.http, "DIL IS GAY").await;
+                println!("Assigning role: {:?}", emoji_str);
+                let role_id = 1087414816068620358;
+
+                let member = guild_id.member(&ctx.http, user_id).await.unwrap();
+                println!("{:?}", member);
+
+                let _ = member.add_role(&ctx.http, role_id).await;
+                println!("Role added");
             }
         }
-
-}
+    }
 
 async fn ready(&self, _ctx: Context, ready: Ready)
     {
