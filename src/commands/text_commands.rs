@@ -32,6 +32,14 @@ impl TextCommands {
                 println!("Error sending message: {:?}", why);
             }
         }
+        
+        if msg.content == "!puno"
+        { 
+            if let Err(why) = msg.channel_id.say(&ctx.http, format!("<@{}> has the best take in music of all the officers!", 151694881281015809u64)).await
+            { 
+                println!("Error sending message: {:?}", why);
+            }
+        }
     }
     
 }
