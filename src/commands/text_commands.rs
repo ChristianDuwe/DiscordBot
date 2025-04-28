@@ -40,6 +40,14 @@ impl TextCommands {
                 println!("Error sending message: {:?}", why);
             }
         }
+        
+        if msg.content == "!sobs"
+        { 
+            if let Err(why) = msg.channel_id.say(&ctx.http, format!("<@{}> makes the best food in the guild",191920897831993344u64)).await
+            { 
+                println!("Error sending message: {:?}", why);
+            }
+        }
     }
     
 }
