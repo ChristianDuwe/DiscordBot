@@ -27,10 +27,6 @@ impl TextCommands {
             { 
                 println!("Error sending message: {:?}", why);
             }
-            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/betty-boop-whip-gif-27641888").await
-            { 
-                println!("Error sending message: {:?}", why);
-            }
         }
         
         if msg.content == "!puno"
