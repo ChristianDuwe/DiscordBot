@@ -27,6 +27,10 @@ impl TextCommands {
             { 
                 println!("Error sending message: {:?}", why);
             }
+            if let Err(why) = msg.channel_id.say(&ctx.http, "https://tenor.com/view/dwight-the-office-theoffice-gif-27712963").await
+            {
+                println!("Error sending message: {:?}", why);
+            }
         }
         
         if msg.content == "!puno"
